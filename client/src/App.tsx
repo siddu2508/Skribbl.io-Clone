@@ -32,8 +32,8 @@ const generateRoomID = () => {
 };
 
 function App() {
-  const [isConnected, setIsConnected] = useState(false);
-
+  // Removed unused isConnected state
+  
   const [userName, setUserName] = useState("");
   const [roomName, setRoomName] = useState("");
   const [roomToDisplay, setRoomToDisplay] = useState("");
@@ -65,12 +65,10 @@ function App() {
   useEffect(() => {
     socket.on('connect', () => {
       console.log("Connected to server with ID:", socket.id);
-      setIsConnected(true);
     });
     
     socket.on('disconnect', () => {
       console.log("Disconnected from server");
-      setIsConnected(false);
     });
     
     socket.on('receive_message', (data: ChatMessage) => {
@@ -117,8 +115,7 @@ function App() {
       setWordsToChoose([]); 
       
       if(data.round && data.totalRounds){
-        setRoundInfo('Round ${data.round} of ${data.totalRounds}');
-
+        setRoundInfo(`Round ${data.round} of ${data.totalRounds}`);
       }
       
       if (socket.id === data.drawerID) {
@@ -227,15 +224,14 @@ function App() {
     return (
       <div className="login-container">
         <h1 style={{fontFamily: 'Nunito, sans-serif', fontSize: 50}}> skribbl.io clone </h1>
-       
-  
+        
         <div>
           <input type="text" placeholder="Enter your username" value={userName} onChange={(e) => setUserName(e.target.value)} style={{ padding: '10px', fontSize: 16, width: "300px", textAlign:'left' }} />
         </div>
-        <div style = {{margin: "15px", justifyContent: 'center', }}>
+        <div style = {{margin: "15px", justifyContent: 'center'}}>
         <button onClick={handleCreateRoom} style={{ padding: "10px 20px", fontSize: 16, cursor: "pointer", backgroundColor:'green', color:'white'}}>Create Room</button>
         </div>
-       
+        
         <div style={{ margin: "20px 0" }}>OR</div>
         <form onSubmit={handleJoinRoom}>
           <input type="text" placeholder="Enter Room ID" value={roomName} onChange={(e) => setRoomName(e.target.value)} style={{ padding: '10px', fontSize: 16, width: "300px", borderBlockColor:'black', color:'black' }} />
@@ -249,6 +245,8 @@ function App() {
     <div className="App">
       <div className="player-list-container">
         <h3>Players in Room: {roomToDisplay}</h3>
+        {/* Added roundInfo display */}
+        {roundInfo && <div style={{textAlign:'center', marginBottom: '10px', fontWeight: 'bold', color: '#555'}}>{roundInfo}</div>}
         <ul>
           {players.map((player, index) => (
             <li key={player.id}>
@@ -317,7 +315,7 @@ function App() {
         <canvas
           ref={canvasRef} width={800} height={600}
           onMouseDown={startDrawing} onMouseUp={stopDrawing} onMouseLeave={stopDrawing} onMouseMove={draw}
-          style={{ cursor: isMyTurn ? 'crosshair' : 'not-allowed', backgroundColor:'white' }}
+          style={{ cursor: isMyTurn ? 'crosshair' : 'not-allowed' }}
         />
       </div>
 
