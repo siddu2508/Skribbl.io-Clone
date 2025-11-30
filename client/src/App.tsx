@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import './App.css'; 
 
 // Ensure this matches your backend URL
-const socket = io("http://localhost:3001");
+const socket = io(import.meta.env.VITE_SERVER_URL || "http://localhost:3001");
 
 const colors = ["#000000", "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF", "#808080", "#800000", "#000080", "#008080", "#800000"];
 
