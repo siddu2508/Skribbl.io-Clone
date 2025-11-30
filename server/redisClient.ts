@@ -1,20 +1,16 @@
 import { createClient } from 'redis';
 
-// Use environment variables or default to localhost
 const redisHost = process.env.REDIS_HOST || 'localhost';
 const redisPort = parseInt(process.env.REDIS_PORT || '6379');
-// For cloud deployment (Render), use REDIS_URL if available
 const redisUrl = process.env.REDIS_URL || `redis://${redisHost}:${redisPort}`;
 
-const client = createClient({
-  url: redisUrl
-});
+const client = createClient({ url: redisUrl });
 
 client.on('error', (err) => console.log('Redis Client Error', err));
 
 (async () => {
   await client.connect();
-  console.log(`Connected to Redis`);
+  console.log(`Connected to Redis at ${redisUrl}`);
 })();
 
 export const setRoomState = async (roomId: string, data: any) => {
