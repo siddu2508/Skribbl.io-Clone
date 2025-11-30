@@ -304,7 +304,10 @@ io.on('connection', (socket) => {
   });
 });
 
-const PORT = 3001;
-server.listen(PORT, () => {
-  console.log(`Backend server (TypeScript) is running on http://localhost:${PORT}`);
+
+
+
+const PORT = parseInt(process.env.PORT || "3001");
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Backend server is running on port ${PORT}`);
 });
