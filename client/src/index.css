@@ -1,0 +1,26 @@
+/* client/src/index.css */
+
+/* 1. Set up the basic page */
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+  background-color: white;
+  background-image: url(https://skribbl.io/img/background.png);
+}
+
+/* 2. This is the magic fix */
+#root {
+  /* This tells the #root div to take up the full screen */
+  min-height: 100vh; 
+  
+  /* This centers everything inside it (your login box) */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box; /* Ensures padding doesn't break layout */
+}

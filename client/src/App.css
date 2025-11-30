@@ -1,0 +1,226 @@
+.App {
+  color: black;
+  display: flex;
+  flex-wrap: nowrap; /* Don't wrap, keep side-by-side */
+  gap: 40px;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  
+}
+
+/* --- Player List (NEW) --- */
+.player-list-container {
+  width: 200px;
+  flex-shrink: 0; /* Don't shrink */
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 600px; /* Match canvas height */
+  box-sizing: border-box;
+  background-color: white;
+  box-shadow: inset;
+}
+
+.player-list-container ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+
+
+
+.player-list-container li {
+  padding: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.game-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+
+.correct-guess {
+  color: green;
+  font-weight: bold;
+  background-color: #f0fff4;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+/* --- Canvas Container --- */
+.canvas-container {
+  flex-grow: 1; /* Canvas area takes up available space */
+
+}
+
+canvas {
+  border: 1px solid black;
+  /* Grid background */
+  background-image: linear-gradient(to right, #eee 1px, transparent 1px),
+                    linear-gradient(to bottom, #eee 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-color: white;
+}
+
+canvas:hover {
+  cursor: crosshair;
+}
+
+/* --- Toolbar --- */
+.toolbar {
+  background-color: white;
+  height:auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  flex-wrap: wrap;
+  width: 800px; /* Match canvas width */
+  margin-bottom: 10px;
+}
+
+.palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.color-swatch {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #000;
+  cursor: pointer;
+  padding: 0;
+}
+
+.tool-button {
+  height: 25px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.brush-size {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timer{
+  justify-content: center;
+  align-items:center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff0000;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+
+
+.word-choice-overlay {
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 20px;
+  z-index: 10;
+  text-align: center;
+}
+
+.word-choice-overlay h3 {
+  margin-top: 0;
+}
+
+.word-choice-overlay button {
+  font-size: 1.2rem;
+  margin: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+/* --- Chat Container --- */
+.chat-container {
+  display: flex;
+  flex-direction: column; /* Stacks chat box on top of form */
+  width: 300px;
+  flex-shrink: 0; /* Don't shrink */
+  height: 800px; /* Make it taller */
+  border: 1px solid #0a0000;
+  box-sizing: border-box;
+}
+
+.game-chat {
+  flex-grow: 1; /* Chat box fills available space */
+  overflow-y: scroll; /* Add scrollbar if chat gets long */
+  padding: 10px;
+  word-wrap: break-word;
+  background-color: #ffffff;
+}
+
+.game-chat div {
+  margin-bottom: 5px;
+}
+
+.timer{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff0000;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  border-top: 1px solid #0e0101;
+}
+
+form input {
+  flex-grow: 1;
+  background-color: #ffffff;
+  border: none;
+  padding: 8px;
+}
+form input:disabled {
+  background-color: #eee;
+}
+
+form button {
+  border: none;
+  background-color: #007bff;
+  color: white;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+form button:disabled {
+  background-color: #999;
+}
+
+
+/* --- Login Screen --- */
+.login-container {
+  /* This combination centers the box on the page */
+
+  background-color: #558ecb;
+ 
+  max-width: 500px;
+  margin: 50px auto; /* 50px from top/bottom, auto left/right */
+  
+  /* These are for looks */
+  padding: 10rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.login-container h1 {
+   
+  margin-top: 0;
+}

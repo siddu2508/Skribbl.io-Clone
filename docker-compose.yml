@@ -1,0 +1,41 @@
+services:
+  # 1. The Redis Service
+  redis:
+    image: redis:alpine
+    container_name: skribbl-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  # 2. The Backend Server
+  server:
+    build: ./server
+    container_name: skribbl-server
+    ports:
+      - "3001:3001"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+
+  # 3. The Frontend Client
+  client:
+    build: ./client
+    container_name: skribbl-client
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_SERVER_URL=http://localhost:3001
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+
+volumes:
+  redis_data:
