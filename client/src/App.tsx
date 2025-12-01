@@ -5,7 +5,7 @@ import './App.css';
 // Ensure this matches your backend URL
 const socket = io(import.meta.env.VITE_SERVER_URL || "http://localhost:3001");
 
-const colors = ["#000000", "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF", "#808080", "#800000", "#000080", "#008080", "#800000"];
+const colors = ["#000000", "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF", "#808080", "#800000", "#008080"];
 
 type DrawData = {
   x: number;
@@ -226,16 +226,18 @@ function App() {
         <h1 style={{fontFamily: 'Nunito, sans-serif', fontSize: 50}}> skribbl.io clone </h1>
         
         <div>
-          <input type="text" placeholder="Enter your username" value={userName} onChange={(e) => setUserName(e.target.value)} style={{ padding: '10px', fontSize: 16, width: "300px", textAlign:'left' }} />
+          <input type="text" placeholder="Enter your username" value={userName} onChange={(e) => setUserName(e.target.value)} style={{ padding: '10px', fontSize: 16, width: "300px"  }} />
         </div>
-        <div style = {{margin: "15px", justifyContent: 'center'}}>
-        <button onClick={handleCreateRoom} style={{ padding: "10px 20px", fontSize: 16, cursor: "pointer", backgroundColor:'green', color:'white'}}>Create Room</button>
+        <div style = {{ justifyContent: 'center', marginLeft:8, width:400}}>
+        <button onClick={handleCreateRoom} >Create Room</button>
         </div>
         
-        <div style={{ margin: "20px 0" }}>OR</div>
+        <div style={{ margin: "1px 0", color:'black', marginBottom:20, marginRight: 40, fontSize:20}}>OR</div>
         <form onSubmit={handleJoinRoom}>
-          <input type="text" placeholder="Enter Room ID" value={roomName} onChange={(e) => setRoomName(e.target.value)} style={{ padding: '10px', fontSize: 16, width: "300px", borderBlockColor:'black', color:'black' }} />
-          <button type="submit" style={{ padding: "10px 20px", fontSize: 16, marginLeft: "10px", cursor: "pointer", color:'white' }}>Join Room</button>
+          <input type="text" placeholder="Enter Room ID" value={roomName} onChange={(e) => setRoomName(e.target.value)} style={{ padding: '10px', fontSize: 16, width: "300px" }} />
+          <div style = {{ justifyContent: 'center'}}>
+          <button type="submit" >Join Room</button>
+           </div>
         </form>
       </div>
     );
@@ -244,23 +246,27 @@ function App() {
   return (
     <div className="App">
       <div className="player-list-container">
-        <h3>Players in Room: {roomToDisplay}</h3>
+        <h3 style={{color: 'black', fontFamily: 'unset'}}>Players in Room:</h3>
+        <h3 style={{color: 'black', fontFamily: 'unset'}}> {roomToDisplay}</h3>
         {/* Added roundInfo display */}
         {roundInfo && <div style={{textAlign:'center', marginBottom: '10px', fontWeight: 'bold', color: '#555'}}>{roundInfo}</div>}
         <ul>
           {players.map((player, index) => (
-            <li key={player.id}>
-              <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                <span>
-                    {index + 1}. {player.name} {isHost && index === 0 && "(Host)"}
-                </span>
-                <strong>{player.score}</strong>
-              </div>
-            </li>
+<li key={player.id}>
+  <div style={{ display: 'flex', justifyContent: 'space-between', width: '250px' }}>
+    <span style={{ flexBasis: '70%', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+      {index + 1}. {player.name} {isHost && index === 0 && "(Host)"}
+    </span>
+
+    <strong style={{ flexBasis: '30%', textAlign: 'right' }}>
+      {player.score}
+    </strong>
+  </div>
+</li>
           ))}
         </ul>
         {isHost && !gameStarted &&  !gameOver && (
-          <button onClick={handleStartGame} style={{width: '100%', padding: '10px', fontSize: '16px'}}>Start Game</button>
+          <button onClick={handleStartGame} style={{width: '100%', padding: '10px', fontSize: '16px', color:'white', backgroundColor:'brown'}}>Start Game</button>
         )}
       </div>
 
